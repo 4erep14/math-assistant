@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * WARNING: Due to shared static state and the use of system resources (System.in and System.out),
+ * WARNING: Due to share static state and the use of system resources (System.in and System.out),
  * tests in this class should be run individually and not together as a suite. Running tests together
  * may lead to interference and false failures. This limitation is noted for maintenance purposes and
  * reflects the static design of the tested components.
@@ -64,7 +64,7 @@ public class MathAssistantControllerTest {
     }
 
     @Test
-    void addEquationToDB_ValidEquation_AddedSuccessfully() throws SQLException {
+    void addEquationToDB_ValidEquation_AddedSuccessfully() {
         provideInput("\nx*2-4\n2\n");
         mockedMathEquationValidator.when(() -> MathEquationValidator.isValidEquation(anyString())).thenReturn(true);
 
@@ -85,7 +85,7 @@ public class MathAssistantControllerTest {
     }
 
     @Test
-    void findEquationsByRoots_CorrectData_FoundSuccessfully() throws SQLException {
+    void findEquationsByRoots_CorrectData_FoundSuccessfully() {
         provideInput("\n1 -2\n");
         List<Double> roots = Arrays.asList(1.0, -2.0);
         List<String> equations = Arrays.asList("x*2 - x - 2 = 0", "x*2 + 2 = 0");
@@ -109,7 +109,7 @@ public class MathAssistantControllerTest {
     }
 
     @Test
-    void findEquationsByRoots_CorrectRoots_FoundSuccessfully() throws SQLException {
+    void findEquationsByRoots_CorrectRoots_FoundSuccessfully() {
         List<Double> roots = Arrays.asList(1.0, -2.0);
         List<String> equations = Arrays.asList("x*2 - x - 2 = 0", "x*2 + 3x + 2 = 0");
         mockedDatabaseHelper.when(() -> DatabaseHelper.findEquationsByRoots(anyList())).thenReturn(equations);
@@ -123,7 +123,7 @@ public class MathAssistantControllerTest {
     }
 
     @Test
-    void findUnsolvedEquations_equationsFound_FoundSuccessfully() throws SQLException {
+    void findUnsolvedEquations_equationsFound_FoundSuccessfully() {
         List<String> equations = Arrays.asList("x*3 - 1 = 0", "x*2 - 4 = 0");
         mockedDatabaseHelper.when(DatabaseHelper::findUnsolvedEquations).thenReturn(equations);
 
